@@ -1,34 +1,95 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <style>
-            body {
-                text-align: center;
-                font-family: 'Arial';
-                background: lightskyblue;
-                color: brown;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>
-            Rick Astley
-        </h1>
-        <h2>
-            This is what he looks like:
-        </h2>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRmbCJmi4R8iI0yVDPvDg3ZF8Su5TZzMxp7w&s"/>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRmbCJmi4R8iI0yVDPvDg3ZF8Su5TZzMxp7w&s"/>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRmbCJmi4R8iI0yVDPvDg3ZF8Su5TZzMxp7w&s"/>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRmbCJmi4R8iI0yVDPvDg3ZF8Su5TZzMxp7w&s"/>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRmbCJmi4R8iI0yVDPvDg3ZF8Su5TZzMxp7w&s"/>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRmbCJmi4R8iI0yVDPvDg3ZF8Su5TZzMxp7w&s"/>
-            
-         <p>
-             
-        </p>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Here is a video of Rick Astley!</a>
-    </body>
+<!-- About Me Section -->
+<section id="about">
+  <div class="about-container">
+    <h2 class="about-title">About Me</h2>
+    <p class="about-text">
+      Hey! I’m <strong>Thiyon</strong>, a 14-year-old guitarist sharing my musical journey on YouTube. 
+      I post covers, practice sessions, and guitar experiments — from classical to acoustic and beyond.
+    </p>
+    <p class="about-text">
+      My main guitar is a <em>Cordoba C5-CET</em> with <em>D’Addario EJ45TT</em> strings, 
+      and I’m always working on new songs to level up my playing.  
+      Every view and comment inspires me to keep going!
+    </p>
+    <a class="about-link" href="https://www.youtube.com/@thiyonguitar" target="_blank">
+      🎸 Watch My Channel
+    </a>
+  </div>
+</section>
 
-</html>
+<!-- Styles -->
+<style>
+  #about {
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: white;
+    padding: 60px 20px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .about-container {
+    max-width: 800px;
+    text-align: center;
+    animation: fadeUp 1.5s ease-out;
+  }
+
+  .about-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    animation: slideIn 1.2s ease-out;
+  }
+
+  .about-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+  }
+
+  .about-text:nth-of-type(1) {
+    animation-delay: 0.5s;
+  }
+  .about-text:nth-of-type(2) {
+    animation-delay: 0.8s;
+  }
+
+  .about-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #ff4b2b;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: transform 0.3s, background 0.3s;
+    animation: fadeIn 1.5s forwards;
+    animation-delay: 1.1s;
+    opacity: 0;
+  }
+
+  .about-link:hover {
+    background: #ff416c;
+    transform: scale(1.08);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+</style>
