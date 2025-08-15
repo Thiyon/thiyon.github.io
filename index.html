@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thiyon Guitarist</title>
+    <link rel="icon" type="image/jpg" href="main.jpg">
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #0f0f0f;
             color: white;
+            /* Prevents flash of unstyled content */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
-        /* Top section with background image + tint */
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* Top section with background image + stronger tint */
         .about {
             position: relative;
             background: url('guitar-bg.jpg') center/cover no-repeat;
@@ -23,12 +31,16 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            /* Initial state for animation */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .about::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.4); /* adjustable tint */
+            background: rgba(0, 0, 0, 0.7); /* Darker tint for better text contrast */
             z-index: 0;
         }
         .about * {
@@ -64,6 +76,9 @@
         .video-section {
             padding: 40px 20px;
             text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .video-grid {
             display: grid;
@@ -77,6 +92,16 @@
             aspect-ratio: 16/9;
             border: none;
             border-radius: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition-delay: 0.2s; /* Staggered video animation */
+        }
+
+        /* Class added by JavaScript when an element is visible */
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Mobile adjustments */
@@ -106,5 +131,31 @@
             <iframe src="https://www.youtube.com/embed/pw-pjp4Oobk" allowfullscreen></iframe>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+
+            // Select all sections and videos to animate
+            const sections = document.querySelectorAll('.about, .video-section, .video-grid iframe');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Stop observing once the element has animated in
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1 // Triggers when 10% of the element is visible
+            });
+
+            // Tell the observer to watch each element
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
