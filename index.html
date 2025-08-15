@@ -22,10 +22,10 @@
             opacity: 1;
         }
 
-        /* Top section with static background + parallax effect */
+        /* Top section with static background + fade effect */
         .about {
             position: relative;
-            background: url('guitar-bg.jpg') center center no-repeat fixed; /* Key change: added 'fixed' */
+            background: url('guitar-bg.jpg') center center no-repeat fixed;
             background-size: cover;
             text-align: center;
             color: white;
@@ -43,14 +43,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 70%, #0f0f0f 100%); /* Key change: Fading gradient */
             z-index: 0;
         }
         .about-content {
             position: relative;
             z-index: 1;
             padding: 80px 20px;
-            /* Animation for the content */
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -64,10 +63,10 @@
             font-weight: 700;
             margin-bottom: 20px;
         }
-        .about p {
+        .about-content p {
+            font-size: clamp(1em, 2vw, 1.1em); /* Key change: Smaller font size for paragraph */
             max-width: 700px;
             margin: auto;
-            font-size: clamp(1em, 2.5vw, 1.2em);
             line-height: 1.6;
         }
         .about button {
@@ -123,7 +122,7 @@
     <section class="about">
         <div class="about-content">
             <h2>About Me</h2>
-            <p>Welcome to my channel! I am <strong>Thiyon</strong>, a dedicated guitarist sharing my musical journey. Here, you will find a collection of guitar covers, practice sessions, and unique musical experiments across a range of genres, from classical to modern acoustic. My primary instrument is a <em>Cordoba C5-CET</em>, and I am committed to continuously improving my skills. Your support and engagement are greatly appreciated.</p>
+            <p>Welcome to my channel! I am <strong>Thiyon</strong>, a guitarist sharing my musical journey. Here, you will find my latest covers, dedicated practice sessions, and creative musical experiments. I'm always working to improve my skills and explore new styles, from classical to modern acoustic. My primary instrument is a <em>Cordoba C5-CET</em>. Thank you for being a part of my journey—every view and comment truly inspires me.</p>
             <a href="https://www.youtube.com/@thiyon" target="_blank">
                 <button>🎸 Watch My Channel</button>
             </a>
