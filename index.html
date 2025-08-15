@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thiyon</title>
     <link rel="icon" type="image/jpg" href="main.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: #0f0f0f;
             color: white;
-            /* Prevents flash of unstyled content */
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
@@ -20,41 +22,52 @@
             opacity: 1;
         }
 
-        /* Top section with background image + stronger tint */
+        /* Top section with static background + parallax effect */
         .about {
             position: relative;
-            background: url('guitar-bg.jpg') center/cover no-repeat;
+            background: url('guitar-bg.jpg') center center no-repeat fixed; /* Key change: added 'fixed' */
+            background-size: cover;
             text-align: center;
-            padding: 80px 20px;
             color: white;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            /* Initial state for animation */
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition: opacity 0.8s ease-out;
         }
         .about::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7); /* Darker tint for better text contrast */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
             z-index: 0;
         }
-        .about * {
+        .about-content {
             position: relative;
             z-index: 1;
+            padding: 80px 20px;
+            /* Animation for the content */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .about.visible .about-content {
+            opacity: 1;
+            transform: translateY(0);
         }
         .about h2 {
-            font-size: 2.5em;
+            font-size: clamp(2em, 5vw, 3.5em);
+            font-weight: 700;
             margin-bottom: 20px;
         }
         .about p {
             max-width: 700px;
             margin: auto;
-            font-size: 1.2em;
+            font-size: clamp(1em, 2.5vw, 1.2em);
             line-height: 1.6;
         }
         .about button {
@@ -63,6 +76,7 @@
             padding: 15px 25px;
             color: white;
             font-size: 1.1em;
+            font-weight: 600;
             border-radius: 30px;
             cursor: pointer;
             margin-top: 20px;
@@ -82,7 +96,7 @@
         }
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 20px;
             max-width: 1000px;
             margin: auto;
@@ -95,7 +109,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            transition-delay: 0.2s; /* Staggered video animation */
+            transition-delay: 0.2s;
         }
 
         /* Class added by JavaScript when an element is visible */
@@ -103,22 +117,17 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Mobile adjustments */
-        @media (max-width: 700px) {
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
 <body>
     <section class="about">
-        <h2>About Me</h2>
-        <p>Welcome to my channel! I am <strong>Thiyon</strong>, a dedicated guitarist sharing my musical journey. Here, you will find a collection of guitar covers, practice sessions, and unique musical experiments across a range of genres, from classical to modern acoustic. My primary instrument is a <em>Cordoba C5-CET</em>, and I am committed to continuously improving my skills. Your support and engagement are greatly appreciated.</p>
-        <a href="https://www.youtube.com/@thiyon" target="_blank">
-            <button>🎸 Watch My Channel</button>
-        </a>
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>Welcome to my channel! I am <strong>Thiyon</strong>, a dedicated guitarist sharing my musical journey. Here, you will find a collection of guitar covers, practice sessions, and unique musical experiments across a range of genres, from classical to modern acoustic. My primary instrument is a <em>Cordoba C5-CET</em>, and I am committed to continuously improving my skills. Your support and engagement are greatly appreciated.</p>
+            <a href="https://www.youtube.com/@thiyon" target="_blank">
+                <button>🎸 Watch My Channel</button>
+            </a>
+        </div>
     </section>
 
     <section class="video-section">
@@ -135,22 +144,19 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.add('loaded');
 
-            // Select all sections and videos to animate
-            const sections = document.querySelectorAll('.about, .video-section, .video-grid iframe');
+            const sections = document.querySelectorAll('.about, .video-section, .video-grid iframe, .about-content');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // Stop observing once the element has animated in
                         observer.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1 // Triggers when 10% of the element is visible
+                threshold: 0.1
             });
 
-            // Tell the observer to watch each element
             sections.forEach(section => {
                 observer.observe(section);
             });
@@ -158,5 +164,3 @@
     </script>
 </body>
 </html>
-
-
